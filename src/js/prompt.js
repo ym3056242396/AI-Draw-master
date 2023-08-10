@@ -1,3 +1,9 @@
+/*
+ * @Author: 星野梦美
+ * @Date: 2023-08-08 18:39:20
+ * @LastEditors: 174050379@qq.com
+ * @LastEditTime: 2023-08-10 14:41:06
+ */
 const default_max_token = 1024
 
 const getContextContent = (context, max_token=default_max_token) => {

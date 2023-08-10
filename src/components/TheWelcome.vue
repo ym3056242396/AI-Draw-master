@@ -1,10 +1,16 @@
+<!--
+ * @Author: 星野梦美
+ * @Date: 2023-08-08 18:39:20
+ * @LastEditors: 174050379@qq.com
+ * @LastEditTime: 2023-08-10 14:43:49
+-->
 <script setup>
-import WelcomeItem from './WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
+import WelcomeItem from './WelcomeItem.vue';
+import DocumentationIcon from './icons/IconDocumentation.vue';
+import ToolingIcon from './icons/IconTooling.vue';
+import EcosystemIcon from './icons/IconEcosystem.vue';
+import CommunityIcon from './icons/IconCommunity.vue';
+import SupportIcon from './icons/IconSupport.vue';
 </script>
 
 <template>
@@ -31,9 +37,7 @@ import SupportIcon from './icons/IconSupport.vue'
     <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>. If you need to test
     your components and web pages, check out
     <a href="https://www.cypress.io/" target="_blank">Cypress</a> and
-    <a href="https://on.cypress.io/component" target="_blank"
-      >Cypress Component Testing</a
-    >.
+    <a href="https://on.cypress.io/component" target="_blank">Cypress Component Testing</a>.
 
     <br />
 
