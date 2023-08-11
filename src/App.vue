@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-screen">
     <!-- toolbar -->
-    <div class="w-full h-14 pt-2 border-b-2 shadow-2xl text-center fixed bg-slate-200">
+    <div class="w-full h-14 pt-2 border-b-2 text-center fixed">
       <!-- 窗口左上角HOME图标 -->
       <!-- <a href="#">
         <svg
@@ -132,9 +132,8 @@
         </t-form>
       </div> -->
       <!-- right -->
-      <div class="flex-auto bg-slate-300 p-2 sm:p-8">
+      <div class="flex-auto p-2 sm:p-8" style="background: rgb(235 37 37 / 6%)">
         <!-- 整体背景板 -->
-
         <div
           class="w-full h-full m-auto relative container max-w-6xl rounded-xl"
           style="background: #fff"
@@ -157,7 +156,7 @@
                   <!-- 主动聊天背景 文字内 -->
                   <div
                     class="text-gray-700 p-4 mx-2 w-fit max-w-2xl 2xl:max-w-4xl rounded-lg cursor-pointer"
-                    style="background: #48D7BF"
+                    style="background: rgba(39, 228, 123, 0.46)"
                     @click="copyAsPrompt(item.message)"
                     v-html="item.message"
                   ></div>
@@ -215,6 +214,7 @@
           </div>
           <div
             class="w-full absolute bottom-0 bg-slate-50 h-22 py-2 px-2 rounded flex flex-col text-sm"
+            style="border: 2px solid #f4f4f4"
           >
             <!-- 切换AI类型 -->
             <!-- <t-dropdown :options="options" v-model="aiType" @click="clickHandler" class="ml-4 mt-1">
@@ -232,20 +232,26 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" />
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg> -->
-            <el-form size="mini" ref="form" :model="form" label-width="150px" v-if="mode === 'draw'">
+            <el-form
+              size="mini"
+              ref="form"
+              :model="form"
+              label-width="150px"
+              v-if="mode === 'draw'"
+            >
               <el-form-item label="生成图片关联词：">
+                <!-- v-on:keyup.enter="query" -->
                 <el-input
-                  v-on:keyup.enter="query"
                   v-model="prompt"
-                  placeholder="AI生成提示词"
+                  placeholder="AI生成提示词(目前只支持英文输入)"
                 ></el-input>
               </el-form-item>
 
               <el-form-item label="逆向敏感词汇：">
+                <!-- v-on:keyup.enter="query" -->
                 <el-input
-                  v-on:keyup.enter="query"
                   v-model="negative_prompt"
-                  placeholder="逆向提示词"
+                  placeholder="逆向提示词(目前只支持英文输入)"
                 ></el-input>
               </el-form-item>
 
@@ -257,8 +263,7 @@
                 </div>
               </el-form-item>
               <el-form-item label="图片采集器：">
-                <el-select v-model="sampler" placeholder="请选择"
-                  >
+                <el-select v-model="sampler" placeholder="请选择">
                   <el-option
                     v-for="item in samplerOptions"
                     :key="item.label"
@@ -271,7 +276,7 @@
               <el-form-item label="绘制精度(推荐20)：">
                 <el-slider v-model="steps" :step="20" show-stops> </el-slider>
               </el-form-item>
-              <el-button style="width:100%; z-index:9999;" @click="query">提交</el-button>
+              <el-button style="width: 100%; z-index: 9999" @click="query">提交</el-button>
             </el-form>
           </div>
         </div>
@@ -316,10 +321,10 @@ export default {
       prompt: '',
       config: {},
       sdServerType: 'common',
-      sdServerTypeOptions: [
-        { label: '公共服务器', value: 'common' },
-        { label: '私有服务器', value: 'private' },
-      ],
+      // sdServerTypeOptions: [
+      //   { label: '公共服务器', value: 'common' },
+      //   { label: '私有服务器', value: 'private' },
+      // ],
       // 本地服务器地址
       sdServerUrl: 'https://gpu-pod64d32e0ea825d265df096e6f-6006.node.inscode.run',
       loading: false,
@@ -343,71 +348,71 @@ export default {
       samplerOptions: [
         {
           label: 'Euler a',
-          name: '10步开始成型，但20步时的五官还是有瑕疵，30步就没什么问题了',
+          name: '绘制精度推荐30',
           value: 1,
         },
         {
           label: 'Euler',
-          name: '10步开始已经不错，但五官有问题，20步已经没什么问题，往后看不出变化',
+          name: '绘制精度推荐20+',
           value: 2,
         },
-        { label: 'LMS', name: '到30步还是十分抽象，色块较多', value: 3 },
+        { label: 'LMS', name: '绘制精度推荐30，多色块', value: 3 },
         {
           label: 'Heun',
-          name: '10步开始成型，五官有瑕疵，20步效果没问题，30步主体细节上有变化',
+          name: '绘制精度推荐30+，细节变化',
           value: 4,
         },
         {
           label: 'DPM2',
-          name: '10步开始成型，五官有瑕疵，20步效果没问题，30步背景细节上有变化',
+          name: '绘制精度推荐30+背景变化',
           value: 5,
         },
         { label: 'DPM2 a', name: '都比较抽象，而且整体变化很大', value: 6 },
         {
           label: 'DPM++ 2S a',
-          name: '10步开始成型，20步和30步效果都不错，而且画面变化幅度不少。颜色饱和度较低',
+          name: '绘制精度推荐20—30，变化幅度提高',
           value: 7,
         },
         {
           label: 'DPM++ 2M',
-          name: '10步的色块还是挺严重，20步基本成型，30步的细节有了进一步的提高',
+          name: '绘制精度推荐30',
           value: 8,
         },
         {
           label: 'DPM++ SDE',
-          name: '10步开始定型，20步成型，30步背景变化和主体细节增加',
+          name: '绘制精度推荐30,背景变化和主体细节增加',
           value: 9,
         },
-        { label: 'DPM fast', name: '抽象派大师', value: 10 },
-        { label: 'DPM adaptive', name: '10步已经做好了，后面变化十分微小', value: 11 },
-        { label: 'LMS Karras', name: '到30步还是有点挣扎', value: 12 },
+        { label: 'DPM fast', name: '抽象派', value: 10 },
+        { label: 'DPM adaptive', name: '绘制精度推荐10', value: 11 },
+        { label: 'LMS Karras', name: '绘制精度推荐10-20', value: 12 },
         {
           label: 'DPM2 Karras',
-          name: '10步还是有点抽象，20步成型，30步的主体细节又有了变化',
+          name: '绘制精度推荐20-30',
           value: 13,
         },
         {
           label: 'DPM2 a Karras',
-          name: '10步还是很抽象，20步继续走样，30步成型但脸部还是有点崩',
+          name: '绘制精度推荐20',
           value: 14,
         },
         {
           label: 'DPM++ 2S a Karras',
-          name: '10步的脸和颜色都不对，20步开始成型，30步细节上又有了变化，整体颜色饱和度低',
+          name: '绘制精度推荐30，整体颜色饱和度低',
           value: 15,
         },
         {
           label: 'DPM++ 2M Karras',
-          name: '10步还是有点破碎，20步基本成型，30步在背景细节上有变化',
+          name: '绘制精度推荐30，背景细节变化',
           value: 16,
         },
         {
           label: 'DPM++ SDE Karras',
-          name: '10步虽然颜色不对，但除了脸都挺成熟了，20步成型，30步细节进一步加强（推荐使用）',
+          name: '绘制精度推荐30，细节进一步加强',
           value: 17,
         },
-        { label: 'DDIM', name: '10步成型，20步仍有微瑕，30步成熟', value: 18 },
-        { label: 'PLMS', name: '一个逐步迈向现实的抽象派大师', value: 19 },
+        { label: 'DDIM', name: '绘制精度推荐30', value: 18 },
+        { label: 'PLMS', name: '现实的抽象派', value: 19 },
       ],
       showMoreSetting: true,
       // 默认生成提示
@@ -477,18 +482,18 @@ export default {
       }
     },
     query() {
-      console.log(this.loading,'状态')
+      console.log(this.loading, '状态');
       if (this.loading) {
         this.$message({
           message: '正在执行中，请稍等!',
-          type: 'warning'
+          type: 'warning',
         });
         return;
       }
       if (this.prompt === '') {
-            this.$message({
+        this.$message({
           message: '提示词不能为空！',
-          type: 'warning'
+          type: 'warning',
         });
         return;
       }
@@ -687,7 +692,9 @@ export default {
     stop() {
       this.client.close();
     },
+    // 文本拷贝
     copyAsPrompt(message) {
+      return;
       console.log(message, 'messagemessage');
       this.prompt = message;
     },
@@ -701,13 +708,13 @@ export default {
     //   this.saveConfig();
     // },
     // 私有本地服务器
-    saveConfig() {
-      const config = JSON.parse(JSON.stringify(this.config));
-      config.sdServerType = this.sdServerType;
-      config.sdServerUrl = this.sdServerUrl;
-      // config.sdServerType = this.sdServerType
-      localStorage.setItem('ai-config', JSON.stringify(config));
-    },
+    // saveConfig() {
+    //   const config = JSON.parse(JSON.stringify(this.config));
+    //   config.sdServerType = this.sdServerType;
+    //   config.sdServerUrl = this.sdServerUrl;
+    //   // config.sdServerType = this.sdServerType
+    //   localStorage.setItem('ai-config', JSON.stringify(config));
+    // },
     recoverConfig() {
       // debugger
       // 初始化塞入配置信息

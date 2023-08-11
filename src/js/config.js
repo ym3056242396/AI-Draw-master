@@ -13,7 +13,7 @@ export default {
           model: 'vicuna-7b-all-v1.1',
           api_url: '',
           api_type: 'openai',
-          robot_img: 'https://profile-avatar.csdnimg.cn/dc758b2144d944dd86c8381860b0139f_qq_25467415.jpg!1',
+          robot_img: 'https://profile-avatar.csdnimg.cn/dc758b2144d944dd86c8381860b0139f_qq_25467415.jpg',
           api_max_token: '1024',
           default_prompt: 'cat',
           max_request_len: '10000',
