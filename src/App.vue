@@ -121,7 +121,8 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="绘制精度(推荐20)：">
-                <el-slider v-model="steps" :step="20" show-stops> </el-slider>
+                <!-- <el-slider v-model="steps" :step="20" show-stops> </el-slider> -->
+                  <el-slider v-model="steps"></el-slider>
               </el-form-item>
               <div style="display: flex">
                 <!-- 切换AI类型 -->
@@ -189,6 +190,7 @@ export default {
         { width: 1280, height: 600, id: 3 },
         { width: 1280, height: 1024, id: 4 },
         { width: 1366, height: 768, id: 5 },
+        { width: 2560, height: 1600, id: 6 },
       ],
       steps: 20, // 绘制精度 （越高越浪费资源）
       sampler: 'DPM++ SDE Karras', // 采集器类型

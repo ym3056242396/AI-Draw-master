@@ -39,6 +39,10 @@ export default {
         resolve(event);
       };
       request.onerror = event => {
+        this.$message({
+          message: '生成失败',
+          type: 'warning',
+        });
         console.info('添加失败');
         reject(event);
       };
@@ -56,6 +60,10 @@ export default {
       };
       request.onerror = event => {
         console.info('添加失败');
+        this.$message({
+          message: '生成失败',
+          type: 'warning',
+        });
         reject(event);
       };
     });
@@ -76,6 +84,10 @@ export default {
       };
       request.onerror = event => {
         console.info('获取失败');
+        this.$message({
+          message: '生成失败',
+          type: 'warning',
+        });
         reject(event);
       };
     });
@@ -92,6 +104,10 @@ export default {
       };
       request.onerror = event => {
         console.info('获取失败');
+        this.$message({
+          message: '生成失败',
+          type: 'warning',
+        });
         reject(event);
       };
     });
