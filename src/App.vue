@@ -214,7 +214,7 @@
             </div> -->
           </div>
           <div
-            class="w-full absolute bottom-0  h-22 py-2 px-2 rounded flex flex-col text-sm"
+            class="w-full absolute bottom-0 bg-slate-50 h-22 py-2 px-2 rounded flex flex-col text-sm"
           >
             <!-- 切换AI类型 -->
             <!-- <t-dropdown :options="options" v-model="aiType" @click="clickHandler" class="ml-4 mt-1">
@@ -271,7 +271,7 @@
               <el-form-item label="绘制精度(推荐20)：">
                 <el-slider v-model="steps" :step="20" show-stops> </el-slider>
               </el-form-item>
-              <el-button  style="width:100%; z-index:9999;" @click="query">提交</el-button>
+              <el-button style="width:100%; z-index:9999;" @click="query">提交</el-button>
             </el-form>
           </div>
         </div>
