@@ -1,9 +1,3 @@
-/*
- * @Author: 星野梦美
- * @Date: 2023-08-08 18:39:20
- * @LastEditors: 174050379@qq.com
- * @LastEditTime: 2023-08-10 14:41:15
- */
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import Prompt from './prompt.js';
 
@@ -14,7 +8,7 @@ class OpenAI {
     this.callback = null;
     this.temperature = parseFloat(config?.temperature ?? 0.7);
   }
-
+  //  聊天类型
   createCompletion(prompt, history, context, callback) {
     const config = this.config;
 
@@ -50,6 +44,7 @@ class OpenAI {
     } else {
       data.prompt = Prompt.getPromptByTemplate(config, context, prompt);
     }
+    console.log(data,'datadatadata')
     // const prefix = config?.prompt_prefix??''
     const fetcher = fetchEventSource(url, {
       method: 'POST',
