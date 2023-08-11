@@ -13,11 +13,11 @@ export default {
           model: 'vicuna-7b-all-v1.1',
           api_url: '',
           api_type: 'openai',
-          robot_img: null,
+          robot_img: 'https://profile-avatar.csdnimg.cn/dc758b2144d944dd86c8381860b0139f_qq_25467415.jpg!1',
           api_max_token: '1024',
           default_prompt: 'cat',
           max_request_len: '10000',
-          user_call_name:'', // ai称呼当前名称
+          user_call_name:'MASTER', // ai称呼当前名称
           prompt_template: '',
           api_prompt_prefix: '',
           show_profile_setting: false,

@@ -3,7 +3,7 @@
     <!-- toolbar -->
     <div class="w-full h-14 pt-2 border-b-2 shadow-2xl text-center fixed bg-slate-200">
       <!-- 窗口左上角HOME图标 -->
-      <a href="#">
+      <!-- <a href="#">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -18,7 +18,7 @@
             d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
           />
         </svg>
-      </a>
+      </a> -->
       <!-- <span class="leading-10 font-bold"
         >{{ name }} {{ config?.mode === 'completions' ? '（无上下文）' : '' }}</span
       > -->
@@ -40,7 +40,7 @@
       </svg>
     </div>
     <!-- main content -->
-        <!-- TODO:  服务器地址默认本地-->
+    <!-- TODO:  服务器地址默认本地-->
 
     <div class="flex w-full h-full pt-14">
       <!-- left  -->
@@ -132,34 +132,45 @@
         </t-form>
       </div> -->
       <!-- right -->
-      <div class="flex-auto bg-slate-300  p-2 sm:p-8">
-        <div class="w-full bg-slate-200 h-full m-auto relative container max-w-6xl rounded-xl">
-          <div class="w-full h-full pb-24 p-4 overflow-y-auto overflow-x-hidden" ref="messageList">
+      <div class="flex-auto bg-slate-300 p-2 sm:p-8">
+        <!-- 整体背景板 -->
+
+        <div
+          class="w-full h-full m-auto relative container max-w-6xl rounded-xl"
+          style="background: #fff"
+        >
+          <div
+            class="w-full h-full pb-24 p-4 overflow-y-auto overflow-x-hidden"
+            style="padding-bottom: 18rem"
+            ref="messageList"
+          >
             <div v-for="(item, index) in message" :key="index" class="mb-8">
               <div v-if="item.user === 'User'">
                 <div class="flex flex-row-reverse">
-                  <t-image
+                  <!-- <t-image
                     class="rounded-lg"
                     v-if="config.user_img"
                     :src="config.user_img"
                     fit="cover"
                     :style="{ width: '40px', height: '40px' }"
-                  ></t-image>
+                  ></t-image> -->
+                  <!-- 主动聊天背景 文字内 -->
                   <div
-                    class="bg-green-400 text-gray-700 p-4 mx-2 w-fit max-w-2xl 2xl:max-w-4xl rounded-lg cursor-pointer"
+                    class="text-gray-700 p-4 mx-2 w-fit max-w-2xl 2xl:max-w-4xl rounded-lg cursor-pointer"
+                    style="background: pink"
                     @click="copyAsPrompt(item.message)"
                     v-html="item.message"
                   ></div>
                 </div>
               </div>
               <div v-else class="flex">
-                <t-image
+                <!-- <t-image
                   class="rounded-lg"
                   v-if="config.robot_img"
                   :src="config.robot_img"
                   fit="cover"
                   :style="{ width: '40px', height: '40px' }"
-                ></t-image>
+                ></t-image> -->
                 <div
                   class="bg-slate-50 text-gray-700 p-4 mx-2 w-fit max-w-2xl 2xl:max-w-4xl rounded-lg text-wrapper"
                 >
@@ -173,7 +184,7 @@
                 </div>
               </div>
             </div>
-            <div class="text-center" v-if="mode !== 'draw'">
+            <!-- <div class="text-center" v-if="mode !== 'draw'">
               <div
                 v-if="loading"
                 @click="stop"
@@ -200,22 +211,13 @@
                 </svg>
                 <span class="ml-2 text-[12px]">停止</span>
               </div>
-            </div>
+            </div> -->
           </div>
           <div
-            class="w-full absolute bottom-0 bg-slate-100 h-22 py-2 px-2 rounded flex flex-col text-sm"
+            class="w-full absolute bottom-0  h-22 py-2 px-2 rounded flex flex-col text-sm"
           >
-            <div class="w-full h-10 flex">
-              <!-- 生成图片关联词 -->
-              <input
-                v-model="prompt"
-                class="flex-auto ring-0 outline-0 pl-2 bg-slate-200 h-10"
-                v-on:keyup.enter="query"
-                placeholder="提示词"
-              />
-
-              <!-- 切换AI类型 -->
-              <!-- <t-dropdown :options="options" v-model="aiType" @click="clickHandler" class="ml-4 mt-1">
+            <!-- 切换AI类型 -->
+            <!-- <t-dropdown :options="options" v-model="aiType" @click="clickHandler" class="ml-4 mt-1">
                 <t-button theme="default" variant="text" shape="square">
                   <t-icon
                     :name="modeImage"
@@ -224,68 +226,53 @@
                   />
                 </t-button>
               </t-dropdown> -->
-
-              <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
                 @click="showMoreSetting=!showMoreSetting"
                 class="w-6 mx-2 ml-4 mt-2 h-6 flex-none text-cyan-800 font-bold hover:text-cyan-600 cursor-pointer">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" />
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg> -->
+            <el-form size="mini" ref="form" :model="form" label-width="150px" v-if="mode === 'draw'">
+              <el-form-item label="生成图片关联词：">
+                <el-input
+                  v-on:keyup.enter="query"
+                  v-model="prompt"
+                  placeholder="AI生成提示词"
+                ></el-input>
+              </el-form-item>
 
-              <!-- 提交事件 -->
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 mx-2 ml-4 mt-2 h-6 flex-none text-cyan-800 font-bold hover:text-cyan-600 cursor-pointer"
-                @click="query"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-                />
-              </svg>
-            </div>
-            <!-- 逆向提取 抽出敏感词汇 -->
-            <div class="w-full h-10 mt-2 flex gap-2" v-if="mode === 'draw'">
-              <input
-                v-model="negative_prompt"
-                class="flex-auto ring-0 outline-0 pl-2 bg-slate-200 h-10"
-                v-on:keyup.enter="query"
-                placeholder="逆向提示词"
-              />
-              <div class="flex-none w-40 ring-0 outline-0 pl-2 h-10 flex justify-between">
-                <!-- IMG 宽度 -->
-                <input
-                  v-model="width"
-                  class="ring-0 outline-0 pl-2 bg-slate-300 h-10 w-16"
-                  placeholder="width"
-                  disabled
-                />
-                <span class="h-10 leading-10">*</span>
-                <!-- IMG 高度 -->
-                <input
-                  v-model="height"
-                  class="ring-0 outline-0 pl-2 bg-slate-300 h-10 w-16"
-                  placeholder="height"
-                  disabled
-                />
-              </div>
-              <input
-                v-model="steps"
-                class="flex-none w-30 ring-0 outline-0 pl-2 bg-slate-300 h-10 w-16"
-                placeholder="steps"
-                disabled
-              />
-              <input
-                v-model="sampler"
-                class="flex-none w-40 ring-0 outline-0 pl-2 bg-slate-200 h-10 w-16 text-small"
-                placeholder="sampler"
-              />
-            </div>
+              <el-form-item label="逆向敏感词汇：">
+                <el-input
+                  v-on:keyup.enter="query"
+                  v-model="negative_prompt"
+                  placeholder="逆向提示词"
+                ></el-input>
+              </el-form-item>
+
+              <el-form-item label="图片分辨率：">
+                <div style="display: flex">
+                  <el-input v-model="width" placeholder="请输入图片宽度"></el-input>
+                  <div class="h-10 leading-10">*</div>
+                  <el-input v-model="height" placeholder="请输入图片高度"></el-input>
+                </div>
+              </el-form-item>
+              <el-form-item label="图片采集器：">
+                <el-select v-model="sampler" placeholder="请选择"
+                  >
+                  <el-option
+                    v-for="item in samplerOptions"
+                    :key="item.label"
+                    :label="item.label + '_' + item.name"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="绘制精度(推荐20)：">
+                <el-slider v-model="steps" :step="20" show-stops> </el-slider>
+              </el-form-item>
+              <el-button  style="width:100%; z-index:9999;" @click="query">提交</el-button>
+            </el-form>
           </div>
         </div>
       </div>
@@ -303,9 +290,7 @@ import PodsApi from './js/pod.js';
 // import MarkdownItVue from 'markdown-it-vue'
 // import 'markdown-it-vue/dist/markdown-it-vue.css'
 // https://github.com/ravenq/markdown-it-vue
-
 // const DataServe = new Data()
-
 export default {
   name: 'LlmApp',
   components: {
@@ -318,7 +303,7 @@ export default {
       userAvatarList: [],
       robotAvatarList: [],
       mode: 'draw',
-      modeImage: 'image', // image chat chart-bubble  //默认类型
+      modeImage: 'draw', // image chat chart-bubble  //默认类型
       aiType: '',
       message: [
         // {"user": "User", "message": "创建一个用户表，要求分区"},
@@ -348,18 +333,89 @@ export default {
         { content: '自动模式', value: 'auto' },
       ],
       showProfileSetting: false, //是否显示角色设置模块
-      width: 1024,
-      height: 768,
+      // 生成图片高宽
+      width: 512,
+      height: 512,
+      // 绘制精度 （浪费资源）
       steps: 20,
       // 采集器
       sampler: 'DPM++ SDE Karras',
+      samplerOptions: [
+        {
+          label: 'Euler a',
+          name: '10步开始成型，但20步时的五官还是有瑕疵，30步就没什么问题了',
+          value: 1,
+        },
+        {
+          label: 'Euler',
+          name: '10步开始已经不错，但五官有问题，20步已经没什么问题，往后看不出变化',
+          value: 2,
+        },
+        { label: 'LMS', name: '到30步还是十分抽象，色块较多', value: 3 },
+        {
+          label: 'Heun',
+          name: '10步开始成型，五官有瑕疵，20步效果没问题，30步主体细节上有变化',
+          value: 4,
+        },
+        {
+          label: 'DPM2',
+          name: '10步开始成型，五官有瑕疵，20步效果没问题，30步背景细节上有变化',
+          value: 5,
+        },
+        { label: 'DPM2 a', name: '都比较抽象，而且整体变化很大', value: 6 },
+        {
+          label: 'DPM++ 2S a',
+          name: '10步开始成型，20步和30步效果都不错，而且画面变化幅度不少。颜色饱和度较低',
+          value: 7,
+        },
+        {
+          label: 'DPM++ 2M',
+          name: '10步的色块还是挺严重，20步基本成型，30步的细节有了进一步的提高',
+          value: 8,
+        },
+        {
+          label: 'DPM++ SDE',
+          name: '10步开始定型，20步成型，30步背景变化和主体细节增加',
+          value: 9,
+        },
+        { label: 'DPM fast', name: '抽象派大师', value: 10 },
+        { label: 'DPM adaptive', name: '10步已经做好了，后面变化十分微小', value: 11 },
+        { label: 'LMS Karras', name: '到30步还是有点挣扎', value: 12 },
+        {
+          label: 'DPM2 Karras',
+          name: '10步还是有点抽象，20步成型，30步的主体细节又有了变化',
+          value: 13,
+        },
+        {
+          label: 'DPM2 a Karras',
+          name: '10步还是很抽象，20步继续走样，30步成型但脸部还是有点崩',
+          value: 14,
+        },
+        {
+          label: 'DPM++ 2S a Karras',
+          name: '10步的脸和颜色都不对，20步开始成型，30步细节上又有了变化，整体颜色饱和度低',
+          value: 15,
+        },
+        {
+          label: 'DPM++ 2M Karras',
+          name: '10步还是有点破碎，20步基本成型，30步在背景细节上有变化',
+          value: 16,
+        },
+        {
+          label: 'DPM++ SDE Karras',
+          name: '10步虽然颜色不对，但除了脸都挺成熟了，20步成型，30步细节进一步加强（推荐使用）',
+          value: 17,
+        },
+        { label: 'DDIM', name: '10步成型，20步仍有微瑕，30步成熟', value: 18 },
+        { label: 'PLMS', name: '一个逐步迈向现实的抽象派大师', value: 19 },
+      ],
       showMoreSetting: true,
       // 默认生成提示
       default_prompt:
         '1girl, (ulzzang-6500:0.7), kpop idol, yae miko,pink hair, long hair,best quality, (painting:1.5), (hair ornament:1.35), jewelry, purple eyes, cherry blossoms, lantern light, depth of field, detailed face, face focus, ribbon_trim, (looking at viewer:1.25), nontraditional miko, shiny skin, long sleeves, smile, thick lips, game cg,  (blurry background:1.2), sitting, upper body <lora:YaeMiko_Test:0.45>,<lora:mix4:0.5>',
       // 敏感词汇处理
       negative_prompt:
-        'nfsw, bright lantern, brightness, (nipples:1.2), pussy, EasyNegative, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, glans,extra fingers, fewer fingers, strange fingers, bad hand, bare thighs,hand,bad finger',
+        'nfsw, bright lantern, brightness, (nipples:1.2), EasyNegative, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, glans,extra fingers, fewer fingers, strange fingers, bad hand,hand,bad finger',
       history: {
         name: 'ai',
         key: 'history',
@@ -421,13 +477,19 @@ export default {
       }
     },
     query() {
+      console.log(this.loading,'状态')
       if (this.loading) {
-        MessagePlugin.warning({ content: '正在执行中，请稍等!', placement: 'center' });
+        this.$message({
+          message: '正在执行中，请稍等!',
+          type: 'warning'
+        });
         return;
       }
       if (this.prompt === '') {
-        MessagePlugin.warning({ content: '提示词不能为空！', placement: 'center' });
-        console.info('提示词不能为空');
+            this.$message({
+          message: '提示词不能为空！',
+          type: 'warning'
+        });
         return;
       }
       if (this.mode === 'draw') {
@@ -583,8 +645,25 @@ export default {
     },
     // 右上角图标 清空记录
     cleanHistory() {
-      this.message = [];
-      this.saveHistory();
+      this.$confirm('是否清空所有生成记录?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+        .then(() => {
+          this.message = [];
+          this.saveHistory();
+          this.$message({
+            type: 'success',
+            message: '已清除!',
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消操作',
+          });
+        });
     },
     initSpeaker() {
       window.speechSynthesis.cancel();
@@ -609,6 +688,7 @@ export default {
       this.client.close();
     },
     copyAsPrompt(message) {
+      console.log(message, 'messagemessage');
       this.prompt = message;
     },
     // // 服务器地址切换
@@ -626,7 +706,7 @@ export default {
       config.sdServerType = this.sdServerType;
       config.sdServerUrl = this.sdServerUrl;
       // config.sdServerType = this.sdServerType
-      localStorage.setItem("ai-config", JSON.stringify(config));
+      localStorage.setItem('ai-config', JSON.stringify(config));
     },
     recoverConfig() {
       // debugger
