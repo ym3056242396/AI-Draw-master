@@ -141,7 +141,7 @@
         >
           <div
             class="w-full h-full pb-24 p-4 overflow-y-auto overflow-x-hidden"
-            style="padding-bottom: 18rem"
+            style="padding-bottom: 20rem"
             ref="messageList"
           >
             <div v-for="(item, index) in message" :key="index" class="mb-8">
