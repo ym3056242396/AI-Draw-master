@@ -132,7 +132,7 @@
         </t-form>
       </div> -->
       <!-- right -->
-      <div class="flex-auto p-2 sm:p-8" style="background: rgb(235 37 37 / 6%)">
+      <div class="flex-auto p-2 sm:p-8" style="background: #f4f4f4">
         <!-- 整体背景板 -->
         <div
           class="w-full h-full m-auto relative container max-w-6xl rounded-xl"
@@ -174,7 +174,8 @@
                   class="bg-slate-50 text-gray-700 p-4 mx-2 w-fit max-w-2xl 2xl:max-w-4xl rounded-lg text-wrapper"
                 >
                   <template v-if="item?.viewMode ?? 'chat' === 'image'">
-                    <img v-if="item.img" :src="item.img" />
+                    <img :src="item.img" v-if="item.img" @click="download(item.img)" />
+                    <!-- 加载lodang -->
                     <img v-else src="/loading.gif" class="w-[512px]" />
                   </template>
                   <template>
@@ -214,7 +215,7 @@
           </div>
           <div
             class="w-full absolute bottom-0 bg-slate-50 h-22 py-2 px-2 rounded flex flex-col text-sm"
-            style="border: 2px solid #f4f4f4"
+            style="border-top: 2px solid #f4f4f4; background: #fff"
           >
             <!-- 切换AI类型 -->
             <!-- <t-dropdown :options="options" v-model="aiType" @click="clickHandler" class="ml-4 mt-1">
@@ -428,6 +429,13 @@ export default {
     };
   },
   methods: {
+    download(url) {
+      var a = document.createElement('a');
+      var event = new MouseEvent('click');
+      a.download = 'ElvesAiImg';
+      a.href = url;
+      a.dispatchEvent(event);
+    },
     // Ai类型切换
     clickHandler() {
       this.modeImage = this.aiType;
