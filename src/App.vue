@@ -121,8 +121,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="绘制精度(推荐20)：">
-                <!-- <el-slider v-model="steps" :step="20" show-stops> </el-slider> -->
-                  <el-slider v-model="steps"></el-slider>
+                <el-slider v-model="steps"></el-slider>
               </el-form-item>
               <div style="display: flex">
                 <!-- 切换AI类型 -->
@@ -136,7 +135,9 @@
                   >
                   </el-option>
                 </el-select>
-                <el-button type="primary" style="width: 100%; z-index: 9999; background:#409eff;" @click="query">提 交</el-button>
+                <el-button type="primary" style="width: 100%; background: #409eff" @click="query"
+                  >提 交</el-button
+                >
               </div>
             </el-form>
           </div>
@@ -347,13 +348,6 @@ export default {
       }
     },
 
-    scrollBottom() {
-      const _this = this;
-      this.$nextTick(() => {
-        _this.$refs.messageList.scrollTop = _this.$refs.messageList.scrollHeight + 20;
-      });
-    },
-
     //  获取
     draw() {
       this.loading = true;
@@ -382,7 +376,6 @@ export default {
         this.sampler;
       messages.push({ user: 'User', message: content });
       messages.push(currentMsg);
-      // this.scrollBottom();
       const config = JSON.parse(JSON.stringify(this.config));
       config.width = this.width;
       config.height = this.height;
@@ -397,11 +390,15 @@ export default {
           currentMsg.img = res;
           messages.splice(messages.length - 1, 1);
           messages.push(currentMsg);
-          // _this.scrollBottom();
           _this.saveHistory();
         })
         .catch(err => {
           _this.loading = false;
+          this.$notify({
+            title: '提示',
+            message: '图片生成失败',
+            duration: 0,
+          });
         });
     },
     // 聊天或其他模式  暂时没有api接口
