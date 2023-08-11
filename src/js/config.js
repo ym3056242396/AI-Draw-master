@@ -4,7 +4,7 @@ export default {
       code: 200,
       data: {
         id: 128897,
-        name: 'AI绘图',
+        name: 'ELVES',
         create_time: 1684920670901,
         app: 'llm_rep',
         resource_type: 'app',

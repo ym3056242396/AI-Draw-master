@@ -157,7 +157,7 @@
                   <!-- 主动聊天背景 文字内 -->
                   <div
                     class="text-gray-700 p-4 mx-2 w-fit max-w-2xl 2xl:max-w-4xl rounded-lg cursor-pointer"
-                    style="background: pink"
+                    style="background: #48D7BF"
                     @click="copyAsPrompt(item.message)"
                     v-html="item.message"
                   ></div>
