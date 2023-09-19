@@ -1,9 +1,10 @@
 /*
- * @Author: 金冠成 222736
+ * @Author: 星野梦美 222736
  * @Date: 2023-08-30 13:58:35
  * @LastEditors: 174050379@qq.com
- * @LastEditTime: 2023-08-30 14:02:16
+ * @LastEditTime: 2023-09-18 16:56:54
  */
+// 屏显水印
 let watermark = {}
 
 let setWatermark = (str) => {
