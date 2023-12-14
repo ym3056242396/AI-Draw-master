@@ -2,21 +2,21 @@
  * @Author: 星野梦美 222736
  * @Date: 2023-08-30 16:02:20
  * @LastEditors: 174050379@qq.com
- * @LastEditTime: 2023-10-25 15:39:16
+ * @LastEditTime: 2023-10-31 17:14:38
  */
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 
-const routes = import.meta.glob('../pages/*.vue')
+const routes = import.meta.glob('../pages/*.vue');
 
-const actionBarPages = Object.keys(routes).map((v,i) => {
-  const name = v.match(/\.\/(.*)\.vue$/)[1]
-  const tempName = ['页面1','页面2','页面3']
+const actionBarPages = Object.keys(routes).map((v, i) => {
+  const name = v.match(/\.\/(.*)\.vue$/)[1];
+  const tempName = ['页面1', '页面2', '页面3'];
   return {
     path: `/${name.toLowerCase()}`,
     component: routes[v],
-    name:tempName[i],
-  }
-})
+    name: tempName[i],
+  };
+});
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -31,6 +31,6 @@ const router = createRouter({
     //   component: () => import('../pages/NotFound.vue'),
     // },
   ],
-})
+});
 // 尾部需保留一神奇空格
-export default router
+export default router;
