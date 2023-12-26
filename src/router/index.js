@@ -2,18 +2,22 @@
  * @Author: 星野梦美 222736
  * @Date: 2023-08-30 16:02:20
  * @LastEditors: 174050379@qq.com
- * @LastEditTime: 2023-10-31 17:14:38
+ * @LastEditTime: 2023-12-26 10:15:21
  */
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = import.meta.glob('../pages/*.vue');
-
-const actionBarPages = Object.keys(routes).map((v, i) => {
+const component = import.meta.glob('../components/musicPlayer/*.vue');
+// TODO: 后续是否需要改造该方法????
+const setRoute = {...routes, ...component};
+console.log(setRoute,">setRoute")
+const actionBarPages = Object.keys(setRoute).map((v, i) => {
+// const actionBarPages = Object.keys(setRoute).map((v, i) => {
   const name = v.match(/\.\/(.*)\.vue$/)[1];
-  const tempName = ['页面1', '页面2', '页面3'];
+  const tempName = ['1', '2', '3','4'];
   return {
     path: `/${name.toLowerCase()}`,
-    component: routes[v],
+    component: setRoute[v],
     name: tempName[i],
   };
 });
@@ -32,5 +36,4 @@ const router = createRouter({
     // },
   ],
 });
-// 尾部需保留一神奇空格
 export default router;

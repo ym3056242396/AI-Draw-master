@@ -152,7 +152,7 @@ import Config from './js/config.js';
 import SDApi from './js/sd.js';
 import StorageApi from './js/storage.js';
 import PodsApi from './js/pod.js';
-import Watermark from './common/js/watermark';
+// import Watermark from '../../common/js/watermark.js'
 
 // https://github.com/ravenq/markdown-it-vue
 // const DataServe = new Data()
@@ -547,7 +547,7 @@ export default {
     },
   },
   mounted() {
-    Watermark.set('ELVES');
+    // Watermark.set('ELVES');
     this.id = this.$route?.params?.id;
     StorageApi.init(this.history.name).then(res => {
       console.log(res, 'res', this.history.name);

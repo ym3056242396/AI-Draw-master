@@ -2,7 +2,7 @@
  * @Author: 星野梦美 222736
  * @Date: 2023-08-08 18:39:20
  * @LastEditors: 174050379@qq.com
- * @LastEditTime: 2023-09-18 17:33:55
+ * @LastEditTime: 2023-12-22 14:40:36
  */
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -19,7 +19,7 @@ export default defineConfig({
     host: true,
     // host:'0.0.0.0' ,//ip地址
     port: 8090, // 设置服务启动端口号
-    open: true, // 设置服务启动时是否自动打开浏览器
+    open: true, // 设置服务启动时是否自动打开浏览器  TODO:  部署时需要关闭此项
   },
   plugins: [
     vue(),

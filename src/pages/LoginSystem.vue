@@ -2,21 +2,21 @@
  * @Author: 星野梦美 222736
  * @Date: 2023-09-18 17:06:53
  * @LastEditors: 174050379@qq.com
- * @LastEditTime: 2023-10-25 14:13:13
+ * @LastEditTime: 2023-12-26 10:32:44
 -->
-<!-- 登入页 -->
+
 <template>
-  <div class="logo_min">登入页</div>
+  <div>
+    <AiRobot />
+  </div>
 </template>
-
-<script>
-export default {};
+<script setup>
+import { ref } from 'vue';
+import AiRobot from '../components/AiRobot/aiRobotImg.vue';
 </script>
-
-<style scoped lang="less">
+<style scoped>
 .logo_min {
   height: 100%;
   width: 100%;
-  // background: #fff;
 }
 </style>

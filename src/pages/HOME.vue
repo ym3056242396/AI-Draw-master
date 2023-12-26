@@ -2,16 +2,16 @@
  * @Author: 星野梦美 222736
  * @Date: 2023-08-30 16:09:53
  * @LastEditors: 174050379@qq.com
- * @LastEditTime: 2023-09-28 16:28:08
+ * @LastEditTime: 2023-12-26 10:30:57
 -->
 <!-- 主页 -->
 <template>
   <div style="padding: 20px">
-    <el-carousel :interval="4000" type="card" :autoplay="false">
+    <!-- <el-carousel :interval="4000" type="card" :autoplay="false">
       <el-carousel-item v-for="(item, index) in imgList" :key="index">
         <el-image :src="item.url" />
       </el-carousel-item>
-    </el-carousel>
+    </el-carousel> -->
   </div>
 </template>
 
