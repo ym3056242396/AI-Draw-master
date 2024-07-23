@@ -19,7 +19,7 @@ export default defineConfig({
     host: true,
     // host:'0.0.0.0' ,//ip地址
     port: 8090, // 设置服务启动端口号
-    open: true, // 设置服务启动时是否自动打开浏览器  TODO:  部署时需要关闭此项
+    open: false, // 设置服务启动时是否自动打开浏览器  TODO:  部署时需要关闭此项
   },
   plugins: [
     vue(),
