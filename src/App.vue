@@ -1,8 +1,8 @@
 <!--
  * @Author: 星野梦美 222736
  * @Date: 2023-08-10 18:23:53
- * @LastEditors: 174050379@qq.com
- * @LastEditTime: 2023-10-25 15:38:27
+ * @LastEditors: 星野梦美
+ * @LastEditTime: 2024-07-23 15:49:46
 -->
 <template>
   <div>
@@ -10,7 +10,7 @@
       <!-- 导航栏 -->
       <div class="window_header">
         <div class="img_box">
-          <img src="aaaa" alt="" />
+          <img src="#" alt="" />
         </div>
       </div>
 
